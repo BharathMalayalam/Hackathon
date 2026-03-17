@@ -31,7 +31,6 @@ exports.listRegistrations = async (req, res) => {
         { email: rx },
         { phone: rx },
         { college: rx },
-        { teamName: rx },
         { preferredProblem: rx },
       ];
     }
@@ -68,6 +67,19 @@ exports.deleteRegistration = async (req, res) => {
     const deleted = await Registration.findByIdAndDelete(id).lean();
     if (!deleted) {
       return res.status(404).json({ error: 'Not found' });
+    }
+
+    // best-effort: delete associated GridFS files
+    try {
+      const { getBucket, toObjectId } = require('../db/gridfs');
+      const bucket = getBucket();
+      const ids = [
+        toObjectId(deleted?.pptFile?.fileId),
+        toObjectId(deleted?.paymentScreenshot?.fileId),
+      ].filter(Boolean);
+      await Promise.all(ids.map((oid) => bucket.delete(oid).catch(() => undefined)));
+    } catch (e) {
+      console.warn('Failed to delete GridFS files:', e?.message || e);
     }
 
     return res.json({ ok: true });

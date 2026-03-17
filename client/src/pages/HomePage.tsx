@@ -25,10 +25,10 @@ const HomePage = () => {
                     </h1>
 
                     <p className="text-lg md:text-xl text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-                        Join 500+ student developers for a 48-hour coding marathon.
+                        Join 100+ student developers for a 24-hour coding marathon.
                         Solve real-world problems, learn modern tech stacks, and win amazing prizes.
                     </p>
-
+                    
                     <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <Link
                             to="/register"
@@ -50,11 +50,11 @@ const HomePage = () => {
             <section className="w-full max-w-5xl mx-auto px-4 py-24 text-center">
                 <h2 className="text-3xl font-bold mb-12 text-white">Event Timeline</h2>
                 <div className="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-blue-500 before:to-transparent">
-                    <TimelineItem date="Oct 10, 9:00 AM" title="Opening Ceremony" description="Kickoff and rules introduction." />
-                    <TimelineItem date="Oct 10, 10:00 AM" title="Hacking Begins" description="Start formulating your ideas and building." />
-                    <TimelineItem date="Oct 11, 2:00 PM" title="Mentorship Sessions" description="Get feedback from industry experts." />
-                    <TimelineItem date="Oct 12, 10:00 AM" title="Submission Deadline" description="Push your final commits." />
-                    <TimelineItem date="Oct 12, 3:00 PM" title="Award Ceremony" description="Winners announced and prizes distributed." />
+                    <TimelineItem date="March 27, 9:00 AM" title="Opening Ceremony" description="Kickoff and rules introduction." />
+                    <TimelineItem date="March 27, 10:00 AM" title="Hacking Begins" description="Start formulating your ideas and building." />
+                    <TimelineItem date="March 27, 2:00 PM" title="Mentorship Sessions" description="Get feedback from industry experts." />
+                    <TimelineItem date="March 27, 04:00 AM" title="Submission Deadline" description="Push your final commits." />
+                    <TimelineItem date="March 27 , 05:00 PM" title="Award Ceremony" description="Winners announced and prizes distributed." />
                 </div>
             </section>
         </div>

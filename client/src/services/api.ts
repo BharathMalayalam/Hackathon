@@ -6,8 +6,7 @@ export type UploadedFileMeta = {
     originalName: string;
     mimeType: string;
     size: number;
-    filename: string;
-    url: string; // server-relative, e.g. /uploads/...
+    fileId: string;
 };
 
 export type TeamMember = {

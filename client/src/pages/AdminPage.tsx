@@ -37,10 +37,10 @@ function StatCard({ label, value, tone }: { label: string; value: number; tone: 
   );
 }
 
-function fileUrl(meta?: { url?: string }) {
-  const u = meta?.url;
-  if (!u || typeof u !== 'string' || u === 'N/A') return '';
-  return u.startsWith('http') ? u : `${SERVER_ORIGIN}${u}`;
+function fileUrl(meta?: { fileId?: string }) {
+  const id = meta?.fileId;
+  if (!id || typeof id !== 'string' || id === 'N/A') return '';
+  return `${SERVER_ORIGIN}/api/files/${id}`;
 }
 
 export default function AdminPage() {

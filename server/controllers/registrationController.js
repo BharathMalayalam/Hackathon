@@ -1,14 +1,21 @@
 const Registration = require('../models/Registration');
+const { getBucket } = require('../db/gridfs');
 
-function uploadedFileToMeta(file) {
-    if (!file) return undefined;
-    return {
-        originalName: file.originalname,
-        mimeType: file.mimetype,
-        size: file.size,
-        filename: file.filename,
-        url: `/uploads/${file.filename}`,
-    };
+async function uploadToGridFS(file, prefix) {
+    const bucket = getBucket();
+    const filename = `${prefix}-${Date.now()}-${file.originalname || 'file'}`;
+    return new Promise((resolve, reject) => {
+        const up = bucket.openUploadStream(filename, {
+            contentType: file.mimetype,
+            metadata: {
+                originalName: file.originalname,
+                fieldname: file.fieldname,
+            },
+        });
+        up.on('error', reject);
+        up.on('finish', () => resolve({ _id: up.id }));
+        up.end(file.buffer);
+    });
 }
 
 exports.registerTeam = async (req, res) => {
@@ -60,6 +67,11 @@ exports.registerTeam = async (req, res) => {
             return res.status(400).json({ error: 'Payment screenshot is required' });
         }
 
+        const [paymentStored, pptStored] = await Promise.all([
+            uploadToGridFS(payment, 'payment'),
+            uploadToGridFS(ppt, 'ppt'),
+        ]);
+
         const registration = await Registration.create({
             fullName,
             email,
@@ -70,8 +82,18 @@ exports.registerTeam = async (req, res) => {
             members: parsedMembers,
             preferredProblem,
             qrCode: qrCode || 'N/A',
-            paymentScreenshot: uploadedFileToMeta(payment) || undefined,
-            pptFile: uploadedFileToMeta(ppt) || undefined,
+            paymentScreenshot: {
+                originalName: payment.originalname,
+                mimeType: payment.mimetype,
+                size: payment.size,
+                fileId: String(paymentStored._id),
+            },
+            pptFile: {
+                originalName: ppt.originalname,
+                mimeType: ppt.mimetype,
+                size: ppt.size,
+                fileId: String(pptStored._id),
+            },
         });
 
         res.status(201).json({ message: 'Registration successful!', registration });

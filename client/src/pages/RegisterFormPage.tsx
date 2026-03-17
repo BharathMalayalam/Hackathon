@@ -181,7 +181,7 @@ const RegisterFormPage = () => {
                                 <input
                                     className={getInputClass(!!errors.fullName, !errors.fullName && touchedFields.fullName)}
                                     {...register("fullName", { required: "Full Name is required" })}
-                                    placeholder="e.g. John Doe"
+                                    placeholder="e.g Bharath Malayalam"
                                 />
                             </InputGroup>
 
@@ -198,7 +198,7 @@ const RegisterFormPage = () => {
                                         required: "Email is required",
                                         pattern: { value: /^\S+@\S+$/i, message: "Invalid email form" }
                                     })}
-                                    placeholder="e.g. name@domain.com"
+                                    placeholder="e.g. bharath@gmail.com"
                                 />
                             </InputGroup>
 
@@ -400,9 +400,11 @@ const RegisterFormPage = () => {
                                 <div className="text-slate-200 font-semibold">What to include</div>
                                 <ul className="mt-4 space-y-2 text-sm text-slate-400">
                                     <li>Project title + team name</li>
-                                    <li>Problem statement + solution overview</li>
+                                    <li>Problem statement </li>
+                                    <li>Solution overview</li>
                                     <li>Tech stack + architecture</li>
                                     <li>Demo flow + future scope</li>
+                                    <li>Conclusion</li>
                                 </ul>
                                 <div className="mt-6 text-xs text-slate-500">
                                     File type: <span className="text-slate-300 font-semibold">PDF</span> • Max 15MB

@@ -26,16 +26,14 @@ const RegistrationSchema = new mongoose.Schema(
       originalName: { type: String, default: 'N/A' },
       mimeType: { type: String, default: 'N/A' },
       size: { type: Number, default: 0 },
-      filename: { type: String, default: 'N/A' },
-      url: { type: String, default: 'N/A' },
+      fileId: { type: String, default: 'N/A', index: true },
     },
 
     pptFile: {
       originalName: { type: String, default: 'N/A' },
       mimeType: { type: String, default: 'N/A' },
       size: { type: Number, default: 0 },
-      filename: { type: String, default: 'N/A' },
-      url: { type: String, default: 'N/A' },
+      fileId: { type: String, default: 'N/A', index: true },
     },
 
     // no status field (approved/pending/rejected removed)
